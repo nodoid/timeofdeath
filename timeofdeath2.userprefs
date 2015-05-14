@@ -1,0 +1,15 @@
+﻿<Properties StartupItem="Droid/timeofdeath2.Droid.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.Nexus 5 (KitKat)" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="timeofdeath2/Results.cs">
+    <Files>
+      <File FileName="timeofdeath2/Conditions.cs" Line="226" Column="57" />
+      <File FileName="timeofdeath2/Results.cs" Line="42" Column="18" />
+      <File FileName="timeofdeath2/TODCalc.cs" Line="131" Column="1" />
+      <File FileName="timeofdeath2/timeofdeath2.cs" Line="54" Column="46" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
