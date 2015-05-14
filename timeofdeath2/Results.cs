@@ -12,10 +12,16 @@ namespace timeofdeath2
 
             BindingContext = App.Self.commonVariables;
 
-            var lblTime = new Label(){ WidthRequest = App.ScreenSize.Width / 4, };
+            var lblTime = new Label(){ WidthRequest = App.ScreenSize.Width / 4 };
             var lblDate = new Label(){ WidthRequest = App.ScreenSize.Width / 4,  };
             lblDate.SetBinding(Label.TextProperty, "GetDate");
             lblTime.SetBinding(Label.TextProperty, "GetTime");
+
+            PropertyChanged += (object sender, System.ComponentModel.PropertyChangedEventArgs e) =>
+            {
+                lblDate.Text = App.Self.commonVariables.GetDate;
+                lblTime.Text = App.Self.commonVariables.GetTime;
+            };
 
             Content = new StackLayout
             { 

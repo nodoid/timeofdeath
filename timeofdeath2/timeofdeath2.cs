@@ -2,12 +2,23 @@
 
 using Xamarin.Forms;
 using System.Linq;
+using System.ComponentModel;
 
 namespace timeofdeath2
 {
 
-    public class CommonVariables
+    public class CommonVariables : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged == null)
+                return;
+
+            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+
         public int PartClothed
         { get; set; }
 
@@ -40,6 +51,7 @@ namespace timeofdeath2
             get
             {
                 var split = DateOfDeath.ToString().Split(' ').ToArray();
+                OnPropertyChanged("CommonVariables");
                 return split.Length == 0 ? string.Empty : split[0];
             }
         }
@@ -49,6 +61,7 @@ namespace timeofdeath2
             get
             {
                 var split = DateOfDeath.ToString().Split(' ').ToArray();
+                OnPropertyChanged("CommonVariables");
                 return split.Length == 0 ? string.Empty : string.Format("{0}{1}", split[1], split.Length > 2 ? (!string.IsNullOrEmpty(split[2]) ? split[2].ToLower() : "") : "");
             }
         }
