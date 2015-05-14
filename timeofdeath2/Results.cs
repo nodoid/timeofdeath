@@ -10,28 +10,12 @@ namespace timeofdeath2
             if (Device.OS == TargetPlatform.iOS)
                 Padding = new Thickness(0, 20, 0, 0);
 
-            // we need to modify the time of death and date of death as we don't have the ToShortDateString and ToShortTimeString within the PCL
-            // we could always just put an interface to the platform, but it's hardly worth the effort
+            BindingContext = App.Self.commonVariables;
 
-            string ToD = "", DoD = "";
-
-            var split = CommonVariables.DateOfDeath.ToString().Split(' ').ToArray();
-
-            // when the DateTime is split, it's of the form split[0] = date, split[1] = time (12hr), split[2] = AM/PM
-            // split[2] may or may not exist
-
-            BindingContext = "CommonVariables";
-
-            var lblTime = new Label(){ WidthRequest = App.ScreenSize.Width / 4 };
-            var lblDate = new Label(){ WidthRequest = App.ScreenSize.Width / 4 };
+            var lblTime = new Label(){ WidthRequest = App.ScreenSize.Width / 4, };
+            var lblDate = new Label(){ WidthRequest = App.ScreenSize.Width / 4,  };
             lblDate.SetBinding(Label.TextProperty, "GetDate");
             lblTime.SetBinding(Label.TextProperty, "GetTime");
-            this.BindingContextChanged += (object sender, System.EventArgs e) =>
-            {
-                lblDate.SetBinding(Label.TextProperty, "GetDate");
-                lblTime.SetBinding(Label.TextProperty, "GetTime");
-            };
-
 
             Content = new StackLayout
             { 

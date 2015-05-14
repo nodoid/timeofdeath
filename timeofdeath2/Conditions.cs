@@ -154,37 +154,37 @@ namespace timeofdeath2
                 case "pickBodyCond":
                     if (spin.SelectedIndex >= 6)
                     {
-                        CommonVariables.Water = 1;
-                        CommonVariables.Air = -2;
+                        App.Self.commonVariables.Water = 1;
+                        App.Self.commonVariables.Air = -2;
                         pickWaterCond.IsEnabled = true;
                         pickAirCond.IsEnabled = false;
                     }
                     else
                     {
-                        CommonVariables.Water = 0;
+                        App.Self.commonVariables.Water = 0;
                         pickWaterCond.IsEnabled = false;
                         pickAirCond.IsEnabled = true;
                     }
-                    CommonVariables.PartialAir = spin.SelectedIndex;
+                    App.Self.commonVariables.PartialAir = spin.SelectedIndex;
                     break;
                 case "pickAirCond":
-                    CommonVariables.Air = spin.SelectedIndex;
-                    CommonVariables.PartialAir = CommonVariables.Water = -1;
+                    App.Self.commonVariables.Air = spin.SelectedIndex;
+                    App.Self.commonVariables.PartialAir = App.Self.commonVariables.Water = -1;
                     break;
                 case "pickWaterCond":
                     if (spin.SelectedIndex == 2)
                     {
                         pickWaterMove.IsEnabled = true;
-                        CommonVariables.PartialAir = 0;
+                        App.Self.commonVariables.PartialAir = 0;
                     }
                     else
                         pickWaterMove.IsEnabled = false;
-                    CommonVariables.Air = -2;
-                    CommonVariables.Water = spin.SelectedIndex;
+                    App.Self.commonVariables.Air = -2;
+                    App.Self.commonVariables.Water = spin.SelectedIndex;
                     break;
                 case "pickWaterMove":
-                    CommonVariables.Air = -2;
-                    CommonVariables.PartialAir = spin.SelectedIndex;
+                    App.Self.commonVariables.Air = -2;
+                    App.Self.commonVariables.PartialAir = spin.SelectedIndex;
                     break;
             }
         }
@@ -193,34 +193,34 @@ namespace timeofdeath2
         {
             // we need to put in some traps before we can calculate
 
-            if (CommonVariables.SurroundTemperature == -999)
+            if (App.Self.commonVariables.SurroundTemperature == -999)
             {
                 await DisplayAlert("Calculator error", "Temperature of surrounds is null", "OK");
                 return;
             }
 
-            if (CommonVariables.BodyTemperature == -999)
+            if (App.Self.commonVariables.BodyTemperature == -999)
             {
                 await DisplayAlert("Calculator error", "Temperature of the body is null", "OK");
                 return;
             }
 
-            if (CommonVariables.BodyTemperature < CommonVariables.SurroundTemperature)
+            if (App.Self.commonVariables.BodyTemperature < App.Self.commonVariables.SurroundTemperature)
             {
                 await DisplayAlert("Calculator error", "The body temperature has to be higher than the surrounds", "OK");
                 return;
             }
 
-            if (CommonVariables.BodyWeight <= 0)
+            if (App.Self.commonVariables.BodyWeight <= 0)
             {
                 await DisplayAlert("Calculator error", "The body has to have some weight", "OK");
                 return;
             }
 
             var calc = new TODCalc();
-            calc.CalcTOD(CommonVariables.DateOfDeath);
+            calc.CalcTOD(App.Self.commonVariables.DateOfDeath);
 
-            CommonVariables.CalcDone = true;
+            App.Self.commonVariables.CalcDone = true;
 
             var masterPage = Parent as TabbedPage;
             masterPage.CurrentPage = masterPage.Children[2];

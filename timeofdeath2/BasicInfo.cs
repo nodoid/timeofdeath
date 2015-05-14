@@ -64,25 +64,25 @@ namespace timeofdeath2
             if (Device.OS == TargetPlatform.iOS)
                 editWeight.HeightRequest = editTempSurrounds.Height;
 
-            editBodyTemp.TextChanged += (object sender, TextChangedEventArgs e) => CommonVariables.BodyTemperature = !string.IsNullOrEmpty(editBodyTemp.Text) ? Convert.ToDouble(editBodyTemp.Text) : 0;
-            editTempSurrounds.TextChanged += (object sender, TextChangedEventArgs e) => CommonVariables.SurroundTemperature = !string.IsNullOrEmpty(editTempSurrounds.Text) ? Convert.ToDouble(editTempSurrounds.Text) : 0;
+            editBodyTemp.TextChanged += (object sender, TextChangedEventArgs e) => App.Self.commonVariables.BodyTemperature = !string.IsNullOrEmpty(editBodyTemp.Text) ? Convert.ToDouble(editBodyTemp.Text) : 0;
+            editTempSurrounds.TextChanged += (object sender, TextChangedEventArgs e) => App.Self.commonVariables.SurroundTemperature = !string.IsNullOrEmpty(editTempSurrounds.Text) ? Convert.ToDouble(editTempSurrounds.Text) : 0;
             editWeight.TextChanged += (object sender, TextChangedEventArgs e) =>
             {
                 var weight = !string.IsNullOrEmpty(editWeight.Text) ? Convert.ToDouble(editWeight.Text) : 0;
                 weight *= pickWeightUnits.SelectedIndex == 0 ? 6.35029318 : 1;
-                CommonVariables.BodyWeight = weight;
+                App.Self.commonVariables.BodyWeight = weight;
             };
 
             datePicker.DateSelected += (object sender, DateChangedEventArgs e) =>
             {
-                CommonVariables.DateOfDeath = e.NewDate;
+                App.Self.commonVariables.DateOfDeath = e.NewDate;
             };
 
             timePicker.PropertyChanged += (sender, e) =>
             {
-                var date = CommonVariables.DateOfDeath;
+                var date = App.Self.commonVariables.DateOfDeath;
                 var time = timePicker.Time;
-                CommonVariables.DateOfDeath = new DateTime(date.Year, date.Month, date.Day, time.Hours, time.Minutes, time.Seconds);
+                App.Self.commonVariables.DateOfDeath = new DateTime(date.Year, date.Month, date.Day, time.Hours, time.Minutes, time.Seconds);
             };
 
             Content = new StackLayout

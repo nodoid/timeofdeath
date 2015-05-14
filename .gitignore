@@ -1,0 +1,10 @@
+/packages/*
+Droid/bin/*
+Droid/obj/*
+iOS/bin/*
+iOS/obj/*
+timeofdeath2.WInPhone/Bin/*
+timeofdeath2.WInPhone/obj/*
+timeofdeath2/bin/*
+timeofdeath2/obj/*
+

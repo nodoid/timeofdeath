@@ -13,13 +13,13 @@ namespace timeofdeath2
             get
             {
                 double correction = 0;
-                switch (CommonVariables.PartClothed)
+                switch (App.Self.commonVariables.PartClothed)
                 {
                     case 0: // dry naked
-                        correction = CommonVariables.Air == 0 ? 0.75 : 1;
+                        correction = App.Self.commonVariables.Air == 0 ? 0.75 : 1;
                         break;
                     case 1: // dry 1-2 thin layers
-                        correction = CommonVariables.Air == 0 ? 0.9 : 1.1;
+                        correction = App.Self.commonVariables.Air == 0 ? 0.9 : 1.1;
                         break;
                     case 2: // dry 2-3 thin layers
                     case 4: // dry 1-2 thicker
@@ -29,11 +29,11 @@ namespace timeofdeath2
                         correction = 1.3;
                         break;
                     case 5: // more layers
-                        correction = CommonVariables.Air == 2 ? 1.8 : 1.4;
+                        correction = App.Self.commonVariables.Air == 2 ? 1.8 : 1.4;
                         break;
                     case 6: // naked
-                        if (CommonVariables.Water != 2 && CommonVariables.Air == -2)
-                            correction = CommonVariables.Water == 0 ? 0.35 : 0.5;
+                        if (App.Self.commonVariables.Water != 2 && App.Self.commonVariables.Air == -2)
+                            correction = App.Self.commonVariables.Water == 0 ? 0.35 : 0.5;
                         else
                             correction = 0.7;
                         break;
@@ -44,7 +44,7 @@ namespace timeofdeath2
                         correction = 1.1;
                         break;
                     case 9: // wet, 2 or more
-                        correction = CommonVariables.PartialAir == 0 ? 1.2 : 0.9;
+                        correction = App.Self.commonVariables.PartialAir == 0 ? 1.2 : 0.9;
                         break;
                 }
                 return correction;
@@ -118,7 +118,7 @@ namespace timeofdeath2
 
         public void CalcTOD(DateTime death)
         {
-            double ta = CommonVariables.SurroundTemperature, tr = CommonVariables.BodyTemperature, m = CommonVariables.BodyWeight;
+            double ta = App.Self.commonVariables.SurroundTemperature, tr = App.Self.commonVariables.BodyTemperature, m = App.Self.commonVariables.BodyWeight;
             bool t = ta <= 23 ? true : false;
             CalculateCandB(ta, tr, m);
             CalculateCorrections(t);
@@ -128,7 +128,7 @@ namespace timeofdeath2
             var newdeath = death.AddHours(h).AddMinutes(mi);
             var calced = death.Subtract(newdeath);
             var todead = death.Subtract(calced);
-            CommonVariables.DateOfDeath = todead;
+            App.Self.commonVariables.DateOfDeath = todead;
         }
     }
 }
